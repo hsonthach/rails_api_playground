@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subreddit: one
+  user: one
+  title: MyString
+  content: MyString
+
+two:
+  subreddit: two
+  user: two
+  title: MyString
+  content: MyString
+
+
+<% 200.times do |x| %>
+post_<%=x%>:
+  subreddit: one 
+  user: one 
+  title: <%= Faker::Lorem.sentence(word_count: 10) %> 
+  content: <%= Faker::Lorem.sentence(word_count: 50) %>
+  created_at:   <%= x.months.ago %>
+<% end %>

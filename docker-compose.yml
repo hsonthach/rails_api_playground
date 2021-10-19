@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  app:
+    image: hugholousk/rails-playground_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    ports:
+      - 3001:3001
+    networks:
+      - backend
+
+    environment:
+      POSTGRES_HOST: db
+      #RAILS_ENV: development
+      RAILS_ENV: production
+
+  db:
+    image: postgres:12
+    restart: always
+    hostname: db
+    volumes:
+      - db-data:/data/postgres
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    networks:
+      - backend
+volumes:
+  db-data:
+
+networks:
+  backend:
